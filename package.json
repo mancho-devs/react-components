@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "publish": "lerna publish",
     "test": "jest"
   },
   "devDependencies": {
