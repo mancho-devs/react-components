@@ -1,0 +1,25 @@
+{
+  "name": "@mancho.devs/footer",
+  "version": "1.0.0",
+  "description": "A component to render a plain footer text.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mancho-devs/react-components.git"
+  },
+  "author": "Mancho Devs <dev@mancho.dev>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mancho-devs/react-components/issues"
+  },
+  "homepage": "https://github.com/mancho-devs/react-components#readme",
+  "dependencies": {
+    "atomize": "1.0.26",
+    "gatsby": "2.32.8",
+    "react": "16.14.0",
+    "react-dom": "^16.14.0"
+  }
+}
