@@ -16,10 +16,14 @@
     "url": "https://github.com/mancho-devs/react-components/issues"
   },
   "homepage": "https://github.com/mancho-devs/react-components#readme",
-  "dependencies": {
+  "devDependencies": {
     "atomize": "1.0.26",
     "gatsby": "2.32.8",
-    "react": "16.14.0",
-    "react-dom": "^16.14.0"
+    "react": "16.14.0"
+  },
+  "peerDependencies": {
+    "atomize": "1.x",
+    "gatsby": "2.x",
+    "react": "16.x"
   }
 }
