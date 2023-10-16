@@ -1,0 +1,32 @@
+{
+  "name": "@mancho.devs/cognito",
+  "version": "2.0.0",
+  "description": "A wrapper around AWS Cognito library with React actions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mancho-devs/react-components.git"
+  },
+  "author": "Mancho Devs <dev@mancho.dev>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mancho-devs/react-components/issues"
+  },
+  "homepage": "https://github.com/mancho-devs/react-components#readme",
+  "devDependencies": {
+    "atomize": "1.0.28",
+    "gatsby": "5.12.6",
+    "react": "18.2.0"
+  },
+  "peerDependencies": {
+    "atomize": "1.x",
+    "gatsby": "5.x",
+    "react": "18.x"
+  },
+  "dependencies": {
+    "amazon-cognito-identity-js": "^6.3.6"
+  }
+}
