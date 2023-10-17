@@ -63,6 +63,24 @@ export default class CognitoClient {
     });
   }
 
+  signOut(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const currentUser = this.userPool.getCurrentUser();
+
+      if (currentUser) {
+        currentUser.signOut(() => {
+          if (arguments.length) {
+            return reject(arguments[0]);
+          }
+
+          resolve();
+        });
+      } else {
+        resolve();
+      }
+    });
+  }
+
   /*
    * `signUp()` instructs Amazon Cognito to send a verification code
    * to the provider email or phone number. This will essencially
