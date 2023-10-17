@@ -1,6 +1,6 @@
 {
   "name": "@mancho.devs/cognito",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A wrapper around AWS Cognito library with React actions.",
   "main": "index.js",
   "scripts": {
