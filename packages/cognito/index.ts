@@ -18,6 +18,32 @@ export default class CognitoClient {
     this.userPool = new CognitoUserPool(params);
   }
 
+  /*
+   * `confirmPassword()` is called after `forgotPassword()` is called.
+   */
+  confirmPassword(username: string, verificationCode: string, newPassword: string) {
+    return new Promise((resolve, reject) => {
+      this.getCognitoUser(username).confirmPassword(verificationCode, newPassword, {
+        onFailure: reject,
+        onSuccess: resolve,
+      });
+    });
+  }
+
+  /*
+   * `forgotPassword()` instructs Amazon Cognito to send a verification code
+   * to the provider email or phone number. This will essencially reset the
+   * existing password.
+   */
+  forgotPassword(username: string) {
+    return new Promise((resolve, reject) => {
+      this.getCognitoUser(username).forgotPassword({
+        onFailure: reject,
+        onSuccess: resolve,
+      });
+    });
+  }
+
   signIn(username: string, password: string): Promise<CognitoSigninResponse> {
     return new Promise((resolve, reject) => {
       const cognitoAuthenticationDetails = new AuthenticationDetails({
@@ -25,12 +51,7 @@ export default class CognitoClient {
         Password: password,
       });
 
-      const cognitoUser = new CognitoUser({
-        Username: username,
-        Pool: this.userPool,
-      });
-
-      cognitoUser.authenticateUser(cognitoAuthenticationDetails, {
+      this.getCognitoUser(username).authenticateUser(cognitoAuthenticationDetails, {
         onFailure: reject,
         onSuccess: function (session, userConfirmationNecessary?: boolean) {
           resolve({
@@ -42,6 +63,12 @@ export default class CognitoClient {
     });
   }
 
+  /*
+   * `signUp()` instructs Amazon Cognito to send a verification code
+   * to the provider email or phone number. This will essencially
+   * create a new user in Amazon Cognito and will wait for sign up
+   * confirmation via `signUpConfirmCode()`.
+   */
   signUp(username: string, password: string): Promise<ISignUpResult> {
     return new Promise((resolve, reject) => {
       const userAttributes = [];
@@ -57,22 +84,27 @@ export default class CognitoClient {
     });
   }
 
+  /*
+   * `signUpConfirmCode()` is called after `signUp()` is called.
+   */
   signUpConfirmCode(username: string, verificationCode: string): Promise<string> {
     return new Promise((resolve, reject) => {
       const forceAliasCreation = false;
 
-      const cognitoUser = new CognitoUser({
-        Username: username,
-        Pool: this.userPool,
-      });
-
-      cognitoUser.confirmRegistration(verificationCode, forceAliasCreation, function (err, result) {
+      this.getCognitoUser(username).confirmRegistration(verificationCode, forceAliasCreation, function (err, result) {
         if (err) {
           return reject(err);
         }
 
         resolve(result);
       });
+    });
+  }
+
+  private getCognitoUser(username: string) {
+    return new CognitoUser({
+      Username: username,
+      Pool: this.userPool,
     });
   }
 }
